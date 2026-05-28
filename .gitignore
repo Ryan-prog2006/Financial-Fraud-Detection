@@ -1,0 +1,24 @@
+# FinShield gitignore rules
+
+# Datasets
+data/raw/*.csv
+data/processed/*.csv
+
+# Python environment & cache
+venv/
+__pycache__/
+*.pyc
+*.pyo
+*.pyd
+.pytest_cache/
+
+# Jupyter Notebooks
+.ipynb_checkpoints/
+
+# Model serialization artifacts
+*.pkl
+*.joblib
+
+# MLflow tracking directory
+mlruns/
+.trash/
