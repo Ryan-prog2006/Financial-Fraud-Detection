@@ -1,0 +1,32 @@
+RBI MASTER DIRECTION ON FRAUD IN BANKS - CLASSIFICATION AND REPORTING GUIDELINES
+Section 1: Classification of Fraud
+Fraudulent activities in banking institutions are classified under specific categories to streamline tracking, reporting, and resolution. These categories include:
+1. Misappropriation and criminal breach of trust: Instances where bank employees, agents, or contractors divert customer or bank funds for unauthorized personal or business use.
+2. Fraudulent encashment through forged instruments: Using forged cheques, demand drafts, or pay orders to illegally withdraw funds from accounts.
+3. Manipulation of books of account or through fictitious accounts: Creating dummy accounts or falsifying balances to conceal shortfalls, thefts, or unauthorized financial transactions.
+4. Negligence and cash shortages: Major cash deficits due to negligence or deliberate fraud.
+5. Cheating and forgery: Using fake KYC documentation, false collateral representations, or forged signatures to acquire credit facilities.
+6. Unauthorised credit facilities extended for reward: Extending loan or credit limits to unapproved borrowers in exchange for personal financial kickbacks.
+7. Unauthorized electronic transactions: Fraudulent card-not-present (CNP) transactions, phishing attacks, SIM swapping, and UPI spoofing.
+
+Section 2: Reporting Timelines and Regulatory Escalation
+Under RBI guidelines, prompt escalation of detected fraud is mandatory to prevent systemic risk:
+- Report to RBI: Banks must report all fraud cases involving Rs 1 lakh (100,000 INR) and above to the RBI's Central Fraud Registry (CFR) within 3 weeks (21 days) of detection.
+- Fraud Monitoring Returns (FMR): Submission of FMR must be completed electronically via the RBI's designated reporting portal.
+- Police / CBI Reporting: For public sector banks, cases involving fraud above Rs 3 crore must be reported to the CBI. Smaller cases are reported to the local police or State Cyber Crime cells.
+- Internal Escalation: Any suspicious activity exceeding Rs 50,000 must be escalated to the bank's internal Fraud Risk Management Committee (FRMC) within 24 hours.
+
+Section 3: Digital Fraud and Card-Not-Present (CNP) Transactions
+RBI directives emphasize the protection of retail electronic payment channels:
+- Multi-Factor Authentication (MFA): All CNP transactions (such as e-commerce card payments) must be secured by an additional factor of authentication (AFA), typically a dynamic One-Time Password (OTP) sent to the registered mobile number or biometric validation.
+- UPI Security Limits: First-time UPI registrations must restrict transaction limits to Rs 5,000 for the first 24 hours to prevent immediate cash-out from compromised credentials.
+- Suspend Thresholds: Online accounts must be automatically suspended if velocity-based alerts are triggered. Velocity anomalies include:
+  1. Transaction amount exceeds 10 times the average transaction value of the user's historical 3-month profile.
+  2. More than 5 distinct transaction attempts to different UPI handles within a 1-hour window.
+  3. Immediate transfer of 95% of account balance within 15 minutes of updating security credentials.
+
+Section 4: Staff Accountability and Forensic Review
+Upon classification of a transaction as fraud, the bank must:
+- Formulate a Staff Accountability Committee to review the involvement of internal operators. The review must be finalized within 6 months.
+- Implement a forensic audit for accounts exceeding Rs 50 crore.
+- Establish regular cybersecurity reviews and audit system access logs.

@@ -1,0 +1,29 @@
+FINANCIAL FRAUD PATTERNS AND BEHAVIORAL ANALYTICS GUIDE
+Pattern 1: Card-Testing Attacks
+Card-testing is the primary reconnaissance pattern used by global card fraud syndicates:
+- Characteristics: Fraudsters execute small verification charges (often less than ₹50 or $1) to check if the stolen credentials are valid.
+- Indicator: Multiple micro-transactions within a very short duration at online payment gateways. Once a test transaction succeeds, it is immediately followed by a large transaction (usually 10x to 100x the test amount) to maximize cash extraction before the cardholder freezes the card.
+- Thresholds: Flag any account that exhibits more than 3 micro-transactions (under ₹100) followed by a high-value transaction (over ₹10,000) within 15 minutes.
+
+Pattern 2: Account Takeover (ATO)
+Account takeover represents a sudden deviation from historical customer behavior:
+- Characteristics: The account changes hands via phishing, SIM swapping, or malware injection.
+- Indicators: A sudden change in device ID, browser type, or IP location, combined with instant high-value fund transfers.
+- Geographic Anomaly: A transaction is processed from a location physically distant from the location of the previous transaction. For example, a card transaction at a local supermarket in Mumbai, followed by an online transaction from an IP address in Russia or Nigeria 15 minutes later.
+- Merchant Anomaly: Transactions at high-risk merchant categories (UPI recharge, gold sellers, electronic shops) that do not align with the customer's historical category distribution.
+
+Pattern 3: Synthetic Identity Fraud
+Synthetic identity fraud involves creating fake bank accounts using a mix of real and fake KYC info:
+- Characteristics: Newly registered accounts that exhibit immediate high-velocity transaction flows.
+- Indicators: The account has no historical profile. Once activated, it immediately receives large UPI deposits followed by rapid withdrawals via ATMs or cash transfers.
+- Behavior: Transaction patterns show round sums (e.g., exactly ₹50,000, ₹100,000) to clear limits quickly.
+
+Pattern 4: Step-Up Velocity
+Step-up velocity is a behavioral fraud technique designed to bypass basic static limits:
+- Characteristics: The transaction amounts increase progressively in a short window.
+- Indicator: Day 1: ₹1,000; Day 2: ₹5,000; Day 3: ₹50,000. This "warms up" the fraud monitoring system before executing the final drain.
+
+Pattern 5: High-Risk Anomalies (Night-time and Round Amounts)
+- Night-time Fraud: Statistics show that fraudulent transactions are disproportionately concentrated between midnight (12:00 AM) and 6:00 AM. This is when cardholders are asleep and unlikely to block their cards immediately.
+- Round Amount Fraud: Genuine retail transactions usually contain decimal parts or odd numbers (e.g. ₹943.50). Fraudulent transactions often use exact round amounts (e.g., ₹20,000, ₹50,000) to maximize extraction bounds.
+- Cross-Border Anomalies: International e-commerce transactions occurring on cards that have never been used outside of India.
