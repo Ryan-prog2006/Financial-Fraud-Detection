@@ -1,1 +1,0 @@
-"""FinShield package initialization."""

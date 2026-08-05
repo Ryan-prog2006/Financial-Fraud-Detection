@@ -1,0 +1,37 @@
+# Python virtual environment — never commit
+venv/
+.venv/
+env/
+
+# Python bytecode
+__pycache__/
+*.py[cod]
+*.pyo
+
+# Git metadata
+.git/
+.gitignore
+
+# Raw data — too large for Docker images
+data/raw/
+
+# Notebooks and EDA artefacts — not needed at inference time
+notebooks/
+
+# Test suite — not needed in production image
+tests/
+.pytest_cache/
+.benchmarks/
+
+# DVC metadata
+.dvc/
+*.dvc
+
+# Editor artefacts
+.vscode/
+.idea/
+*.egg-info/
+
+# OS metadata
+.DS_Store
+Thumbs.db

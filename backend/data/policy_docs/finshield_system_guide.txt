@@ -1,0 +1,21 @@
+FINSHIELD AI FRAUD DETECTION - SYSTEM OPERATING GUIDE
+Section 1: Machine Learning Model Layout
+FinShield implements a multi-layered classification system to balance detection latency and accuracy:
+1. XGBoost Model: Evaluates static, aggregate transaction features (Amount, z-scores, night-time indicators, V features interactions). Optimized for microsecond latency.
+2. LightGBM Model: Used in parallel with XGBoost to provide an ensemble vote, utilizing fast leaf-wise tree growth to detect complex non-linear combinations.
+3. Isolation Forest: Unsupervised anomaly detector trained exclusively on legitimate transaction volumes. Flags outliers that deviate from the normal distribution.
+4. BiLSTM Model: Processes sequences of the last 10 transaction vectors for a user to identify rolling time-series velocity patterns.
+
+Section 2: Interpreting SHAP and Explaining Flags
+SHAP (SHapley Additive exPlanations) values measure the feature contribution to the model's prediction:
+- positive SHAP value: The feature pushed the model output towards classifying the transaction as FRAUD.
+- negative SHAP value: The feature pushed the classification towards LEGITIMATE.
+- Key features like V14 and V4 represent latent PCA projections that carry high correlation with historic fraud alerts.
+- Amount_zscore represents how many standard deviations the transaction amount is from the user's mean spending profile.
+
+Section 3: Threshold and Escalation Procedures
+FinShield operates on two key alert thresholds:
+- Standard Block Threshold (0.5): If the ensemble fraud probability is 0.5 or above, the system automatically blocks the transaction and sends an SMS OTP for step-up verification.
+- Review Threshold (0.3): If the score is between 0.3 and 0.5, the transaction is allowed to proceed but is routed to the Manual Review Queue.
+- Escalation: Flagged high-risk events (score > 0.8) must be escalated to the Fraud Investigation Team.
+- False Positives: If a blocked transaction is confirmed as legitimate by the customer, mark it as resolved and add the device ID to the whitelist database.

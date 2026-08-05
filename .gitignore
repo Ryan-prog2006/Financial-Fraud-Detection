@@ -1,10 +1,16 @@
-# FinShield gitignore rules
+# Environment secrets
+.env
+.env.example
 
-# Datasets
-data/raw/*.csv
-data/processed/*.csv
+# Datasets and processed artifacts
+backend/data/raw/
+backend/data/processed/
+backend/data/vectorstore/
 
-# Python environment & cache
+# Hugging Face Spaces local artifacts
+hf_app/artifacts/
+
+# Virtual environment and Python caches
 venv/
 __pycache__/
 *.pyc
@@ -12,13 +18,16 @@ __pycache__/
 *.pyd
 .pytest_cache/
 
-# Jupyter Notebooks
-.ipynb_checkpoints/
-
-# Model serialization artifacts
+# Serialized model pickle files
 *.pkl
 *.joblib
 
-# MLflow tracking directory
+# MLflow tracking
 mlruns/
+mlflow.db
 .trash/
+
+# IDE files
+.vscode/
+.idea/
+.ipynb_checkpoints/

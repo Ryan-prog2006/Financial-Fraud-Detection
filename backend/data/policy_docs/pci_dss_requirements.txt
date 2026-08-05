@@ -1,0 +1,31 @@
+PCI DSS v4.0 SUMMARY - CARDHOLDER DATA ENVIRONMENT SECURITY STANDARDS
+Section 1: Authentication and Access Controls (Requirement 8)
+Requirement 8 focuses on identifying users and authenticating access to system components:
+- Unique Identification: Assign a unique ID to all individuals with access to the Cardholder Data Environment (CDE). Under no circumstances are shared or group accounts allowed.
+- Multi-Factor Authentication (MFA): Implement MFA for all administrative access and remote access to the CDE. This includes access from outside the bank's network as well as internal network segments.
+- Password Complexity: Passwords must contain at least 12 characters, including numbers, upper/lower case letters, and special characters. Passwords must be changed every 90 days.
+- Lockout Policy: Lock accounts after a maximum of 6 failed login attempts. The lockout duration must be set to at least 30 minutes or require administrator unlock.
+
+Section 2: Logging and Monitoring (Requirement 10)
+Requirement 10 details audit trail tracking requirements:
+- Log everything: Track and monitor all access to system components, especially cardholder data. Log entries must capture:
+  1. User identification (who did it).
+  2. Type of event (login, file read, write, execution).
+  3. Date and time of transaction.
+  4. Success or failure status.
+  5. Origin of the event (IP address, system component ID).
+- Daily Log Review: Review logs for CDE components daily to detect suspicious behaviors. Automated analysis tools must raise immediate alerts on log modifications or clearance events.
+- Audit Trail Retention: Retain CDE audit logs for at least one year, with a minimum of three months' logs immediately available for online analysis.
+
+Section 3: Card-Testing Attacks and Velocity Monitoring
+Card-testing is a method where fraudsters use automated scripts to test lists of stolen credit card numbers against merchant accounts:
+- Attack Pattern: Characterized by rapid, sequential e-commerce transactions of very small amounts (often Rs 10 to Rs 100) at unusual hours, testing validity before executing large fraud sweeps.
+- Velocity Checks: Systems must trigger automated block actions if:
+  1. The same card number is used more than 3 times within 10 minutes (regardless of success/failure).
+  2. The same IP address initiates card submissions from more than 2 distinct card numbers in a 1-hour window.
+- Merchant Category Code (MCC) Monitoring: Establish specific controls for high-risk MCCs, including digital wallets, gaming sites, telecommunications recharge portals, and gift card sellers.
+
+Section 4: Geographic and Device Anomaly Detection
+Compliance mandates identifying anomalous location discrepancies:
+- Impossible Travel: Flag transactions occurring at physical merchant locations separated by geographic distances that are physically impossible to travel in the elapsed time.
+- Device Fingerprinting: Track and block requests where the device fingerprint changes rapidly or indicates an emulator or proxy network (VPN) masking the true source.

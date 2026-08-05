@@ -1,0 +1,33 @@
+FROM python:3.11-slim
+
+# System dependencies for LightGBM and XGBoost
+RUN apt-get update && apt-get install -y --no-install-recommends \
+    gcc \
+    g++ \
+    libgomp1 \
+    && rm -rf /var/lib/apt/lists/*
+
+WORKDIR /app
+
+# Install Python dependencies first (layer caching)
+COPY requirements.txt .
+RUN pip install --no-cache-dir -r requirements.txt
+
+# Copy application source
+COPY src/ ./src/
+
+# Copy model artefacts and scaler
+COPY data/models/ ./data/models/
+COPY data/processed/scaler.pkl ./data/processed/scaler.pkl
+
+# Copy LLM / RAG assets
+COPY data/vectorstore/ ./data/vectorstore/
+COPY data/policy_docs/ ./data/policy_docs/
+
+# Runtime environment
+COPY .env .
+
+EXPOSE 8000
+
+# Uvicorn with 2 workers — scale horizontally via docker-compose replicas
+CMD ["uvicorn", "src.api.main:app", "--host", "0.0.0.0", "--port", "8000", "--workers", "2"]

@@ -1,0 +1,59 @@
+name: Deploy to Hugging Face Spaces
+
+on:
+  push:
+    branches: [main]
+  workflow_run:
+    workflows: ["FinShield CI"]
+    types: [completed]
+    branches: [main]
+
+jobs:
+  deploy:
+    runs-on: ubuntu-latest
+    if: ${{ github.event.workflow_run.conclusion == 'success' || github.event_name == 'push' }}
+
+    steps:
+      - name: Checkout code
+        uses: actions/checkout@v4
+        with:
+          fetch-depth: 0
+          lfs: true
+
+      - name: Set up Python 3.11
+        uses: actions/setup-python@v5
+        with:
+          python-version: "3.11"
+
+      - name: Install huggingface-hub
+        run: pip install huggingface-hub
+
+      - name: Deploy to Hugging Face Spaces
+        env:
+          HF_TOKEN: ${{ secrets.HF_TOKEN }}
+          HF_USERNAME: ${{ secrets.HF_USERNAME }}
+        run: |
+          python -c "
+          from huggingface_hub import HfApi
+          import os
+          api = HfApi(token=os.environ['HF_TOKEN'])
+          username = os.environ['HF_USERNAME']
+          repo_id = f'{username}/finshield'
+          
+          # Create space if it doesn't exist
+          try:
+              api.create_repo(repo_id=repo_id, repo_type='space',
+                             space_sdk='streamlit', exist_ok=True)
+              print(f'Space ready: {repo_id}')
+          except Exception as e:
+              print(f'Space creation: {e}')
+          
+          # Upload all hf_app files
+          api.upload_folder(
+              folder_path='hf_app',
+              repo_id=repo_id,
+              repo_type='space',
+              commit_message=f'Deploy from GitHub Actions - {os.environ.get(\"GITHUB_SHA\", \"manual\")[:7]}'
+          )
+          print(f'Deployed to https://huggingface.co/spaces/{repo_id}')
+          "

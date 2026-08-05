@@ -1,0 +1,69 @@
+version: "3.8"
+
+services:
+  # ------------------------------------------------------------------
+  # MLflow Tracking Server
+  # Serves the experiment registry UI at http://localhost:5000
+  # ------------------------------------------------------------------
+  mlflow:
+    build:
+      context: .
+      dockerfile: docker/Dockerfile.mlflow
+    container_name: finshield_mlflow
+    ports:
+      - "5000:5000"
+    volumes:
+      # Persist mlruns directory across container restarts
+      - ./mlruns:/mlflow/mlruns
+    restart: unless-stopped
+    healthcheck:
+      test: ["CMD", "curl", "-f", "http://localhost:5000/health"]
+      interval: 30s
+      timeout: 10s
+      retries: 3
+
+  # ------------------------------------------------------------------
+  # FastAPI Inference Service
+  # Fraud scoring endpoint at http://localhost:8000/docs
+  # ------------------------------------------------------------------
+  api:
+    build:
+      context: .
+      dockerfile: docker/Dockerfile.api
+    container_name: finshield_api
+    ports:
+      - "8000:8000"
+    env_file:
+      - .env
+    environment:
+      - MLFLOW_TRACKING_URI=http://mlflow:5000
+    volumes:
+      # Hot-swap model artefacts without rebuilding the image
+      - ./data:/app/data
+    depends_on:
+      - mlflow
+    restart: unless-stopped
+
+  # ------------------------------------------------------------------
+  # Streamlit Dashboard
+  # Interactive monitoring UI at http://localhost:8501
+  # ------------------------------------------------------------------
+  dashboard:
+    image: python:3.11-slim
+    container_name: finshield_dashboard
+    working_dir: /app
+    command: >
+      sh -c "pip install --quiet streamlit pandas plotly requests &&
+             streamlit run dashboard/app.py
+             --server.port 8501
+             --server.address 0.0.0.0
+             --server.headless true"
+    ports:
+      - "8501:8501"
+    volumes:
+      - .:/app
+    env_file:
+      - .env
+    depends_on:
+      - api
+    restart: unless-stopped

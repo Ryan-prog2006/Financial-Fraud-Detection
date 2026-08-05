@@ -1,0 +1,17 @@
+FROM python:3.11-slim
+
+WORKDIR /mlflow
+
+# Install only MLflow — keep image lean
+RUN pip install --no-cache-dir mlflow==2.13.0
+
+# Copy existing experiment runs so the registry is pre-populated
+COPY mlruns/ ./mlruns/
+
+EXPOSE 5000
+
+# Backend: SQLite file for metadata; artefacts stored on the mounted volume
+CMD ["mlflow", "ui", \
+     "--host", "0.0.0.0", \
+     "--port", "5000", \
+     "--backend-store-uri", "./mlruns"]
