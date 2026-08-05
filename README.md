@@ -1,12 +1,12 @@
 # FinShield - AI-Powered Financial Fraud Detection Platform
 
-[![CI](https://github.com/YOUR_USERNAME/finshield/actions/workflows/ci.yml/badge.svg)](https://github.com/YOUR_USERNAME/finshield/actions/workflows/ci.yml)
+[![CI](https://github.com/Ryan-prog2006/Financial-Fraud-Detection/actions/workflows/ci.yml/badge.svg)](https://github.com/Ryan-prog2006/Financial-Fraud-Detection/actions/workflows/ci.yml)
 [![Python 3.11](https://img.shields.io/badge/python-3.11-blue.svg)](https://www.python.org/)
 [![License: MIT](https://img.shields.io/badge/License-MIT-yellow.svg)](https://opensource.org/licenses/MIT)
 
 > End-to-end fraud detection platform combining XGBoost, BiLSTM deep learning, LLM+RAG intelligence, and production MLOps — deployed as a live demo.
 
-**[🚀 Live Demo](https://huggingface.co/spaces/YOUR_USERNAME/finshield)** · **[📖 API Docs](http://localhost:8000/docs)** · **[📊 MLflow UI](http://localhost:5000)**
+**[🚀 Live Demo](https://financial-fraud-detection-a1.streamlit.app/)** · **[📖 Local API Docs](http://localhost:8000/docs)** · **[📊 Local MLflow UI](http://localhost:5000)**
 
 ---
 
@@ -98,8 +98,8 @@ Set up and run the FinShield project locally by following these steps:
 
 ```bash
 # Clone the repository
-git clone https://github.com/YOUR_USERNAME/finshield.git
-cd finshield
+git clone https://github.com/Ryan-prog2006/Financial-Fraud-Detection.git
+cd Financial-Fraud-Detection
 
 # Create virtual environment and activate
 python -m venv venv
