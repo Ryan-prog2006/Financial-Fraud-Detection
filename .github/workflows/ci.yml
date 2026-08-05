@@ -50,9 +50,8 @@ jobs:
           data['Class'] = np.where(np.random.rand(n) < 0.002, 1, 0)
           pd.DataFrame(data).to_csv('data/raw/creditcard.csv', index=False)
           "
-          python src/data/pipeline.py
-          python src/models/pipeline_ml.py
-          python src/llm/document_loader.py
+          python -m src.data.pipeline
+          python -m src.models.pipeline_ml
         env:
           GROQ_API_KEY: ${{ secrets.GROQ_API_KEY }}
 
